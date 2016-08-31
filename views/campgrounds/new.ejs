@@ -1,0 +1,27 @@
+<% include ../header %>
+<div class="col-md-4 col-md-offset-4">
+  <h2> Add New Campground </h2>
+  <form method="post" action="/campgrounds">
+    <div class="form-group">
+      <span class="input-group-addon" id="image"><i class="pull-left glyphicon glyphicon-eye-open" aria-hidden="true"></i> Image URL</span>
+      <input type="text" class="form-control" name="image" placeholder="http://example.com/example.jpeg" aria-describedby="image">
+    </div>
+    <div class="form-group">
+      <span class="input-group-addon" id="name"><i class="pull-left glyphicon glyphicon-tent" aria-hidden="true"></i>Campground Name</span>
+      <input type="text" class="form-control" name="name" placeholder="Example Campground" aria-describedby="name">
+    </div>
+    <div class="form-group">
+      <span class="input-group-addon" id="price"><i class="pull-left glyphicon glyphicon-credit-card" aria-hidden="true"></i>Price</span>
+      <input type="number" class="form-control" name="price" placeholder="/-" aria-describedby="price">
+    </div>
+    <div class="form-group">
+      <span class="input-group-addon" id="name"><i class="pull-left glyphicon glyphicon-align-justify" aria-hidden="true"></i>Description</span>
+      <textarea class="form-control" name="description" placeholder="Description of campground"> </textarea>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary btn-block">Submit</button>
+    </div>
+  </form>
+  <a href="/campgrounds">Go Back</a>
+</div>
+<% include ../footer %>

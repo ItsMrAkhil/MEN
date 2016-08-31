@@ -1,0 +1,19 @@
+
+<% include ./header %>
+<div class="col-md-4 col-md-offset-4">
+  <h2><center>Register</center></h2>
+  <form action="/register" method="POST">
+      <div class="form-group">
+        <span class="input-group-addon" id="username"><i class="pull-left glyphicon glyphicon-user" aria-hidden="true"></i>User Name</span>
+        <input type="text" class="form-control" placeholder="John Messy" aria-describedby="username" name="username">
+      </div>
+      <div class="form-group">
+        <span class="input-group-addon" id="password"><i class="pull-left glyphicon glyphicon-lock" aria-hidden="true"></i>Password</span>
+        <input type="password" class="form-control" placeholder="******" aria-describedby="password" name="password">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">Register</button>
+      </div>
+  </form>
+</div>
+<% include ./footer %>
