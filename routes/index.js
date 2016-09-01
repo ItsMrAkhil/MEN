@@ -16,6 +16,8 @@ router.post('/register', function(req, res){
   User.register(newUser, req.body.password, function(err, user){
     if(err){
       console.log(err);
+      req.flash('error','User already exists');
+      res.redirect('back');
     } else {
       passport.authenticate('local')(req, res, function(){
         req.flash('success', 'Welcome to CampSite '+user.username);

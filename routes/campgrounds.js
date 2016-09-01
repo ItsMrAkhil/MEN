@@ -7,7 +7,8 @@ router.get('/', function(req, res){
   Campground.find({}, function(err, allCampgrounds){
     if(err){
       console.log(err);
-      res.redirect('/');
+      req.flash('error', 'Something went wrong');
+      res.redirect('back');
     } else {
       res.render('campgrounds/index', {campgrounds: allCampgrounds});
     }
@@ -27,6 +28,8 @@ router.post('/', middleware.isLoggedIn, function(req, res){
   Campground.create(newCampground, function(err, newlyCreated){
     if(err){
       console.log(err);
+      req.flash('error', 'Something went wrong');
+      res.redirect('back');
     } else {
       console.log(newlyCreated._id+" has been created newly");
       res.redirect('/campgrounds');
@@ -44,15 +47,25 @@ router.get('/:id', function(req, res){
   .exec(function(err, foundCampground){
     if(err){
       console.log(err);
-    } else {
+      req.flash('error', 'Something went wrong');
+      res.redirect('back');
+    } else if(foundCampground){
       res.render('campgrounds/show', {campground: foundCampground});
+    } else {
+      req.flash('error', 'Something went wrong');
+      res.redirect('back');
     }
   });
 });
 
 router.get('/:id/edit', middleware.checkCampgroundOwnerShip, function(req, res){
   Campground.findById(req.params.id, function(err, foundCampground){
-    res.render('campgrounds/edit', {campground: foundCampground});
+    if(foundCampground){
+      res.render('campgrounds/edit', {campground: foundCampground});
+    } else {
+      req.flash('error', 'Something went wrong');
+      res.redirect('back');
+    }
   });
 });
 
@@ -63,7 +76,8 @@ router.put('/:id', middleware.checkCampgroundOwnerShip, function(req, res){
   Campground.findByIdAndUpdate(id, campground, function(err, updatedCampground){
     if(err){
       console.log(err);
-      res.redirect('/campgrounds');
+      req.flash('error', 'Something went wrong');
+      res.redirect('back');
     } else {
       res.redirect('/campgrounds/' + req.params.id);
     }
@@ -74,6 +88,7 @@ router.delete('/:id', middleware.checkCampgroundOwnerShip, function(req, res){
   Campground.findByIdAndRemove(req.params.id, function(err, removedCampground){
     if(err){
       console.log(err);
+      req.flash('error', 'Something went wrong');
       res.redirect('/campgrounds');
     } else {
       res.redirect('/campgrounds');
