@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <title>CampSite</title>
     <link href="/bootstrap.css" rel="stylesheet">
+    <script   src="jquery.js"></script>
+    <script src="/bootstrap.js"></script>
     <link href="/main.css" rel="stylesheet">
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"> -->
   </head>
   <body>
     <nav class="navbar navbar-default">
@@ -41,12 +42,14 @@
     </nav>
     <div class="container">
       <% if(error && error.length >0){ %>
-        <div class="alert alert-danger" role="alert">
-          <%= error %>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Error!</strong> <%= error %>
         </div>
       <% }%>
       <% if(success && success.length >0){ %>
-        <div class="alert alert-success" role="alert">
-          <%= success %>
+        <div class="alert alert-success alert-dismissible" role="alert">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Success!</strong> <%= success %>
         </div>
       <% }%>

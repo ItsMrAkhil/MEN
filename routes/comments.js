@@ -9,6 +9,8 @@ router.get('/:id/comments/new', middleware.isLoggedIn, function(req, res){
   Campground.findById(req.params.id, function(err, campground){
     if(err){
       console.log(err);
+      req.flash('error', 'Something went wrong');
+      res.redirect('back');
     } else {
       console.log(campground);
       res.render('comments/new', {campground: campground});
@@ -20,6 +22,8 @@ router.post('/:id/comments/', middleware.isLoggedIn, function(req, res){
   Campground.findById(req.params.id, function(err, campground){
     if(err){
       console.log(err);
+      req.flash('error', 'Something went wrong');
+      res.render('back');
     } else {
       Comment.create(req.body.comment, function(err, comment){
         if(err){
@@ -42,6 +46,7 @@ router.get('/:id/comments/:comment_id/edit', middleware.checkCommentOwnerShip, f
   Comment.findById(req.params.comment_id, function(err, foundComment){
     if(err){
       console.log(err);
+      req.flash('error', 'Something went wrong');
       res.redirect('back');
     } else {
       res.render('comments/edit', {campground_id: req.params.id, comment: foundComment});
