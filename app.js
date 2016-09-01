@@ -7,6 +7,7 @@ var express       = require('express'),
   methodOverride  = require('method-override'),
   expressSession  = require('express-session'),
   mongoose        = require('mongoose'),
+  logger          = require('morgan'),
   Campground      = require('./models/campground'),
   Comment         = require('./models/comment'),
   User            = require('./models/user');
@@ -17,12 +18,12 @@ var commentRoutes     = require('./routes/comments'),
     indexRoutes       = require('./routes/index');
 
 mongoose.connect('mongodb://localhost/campsite');
-mongoose.promise = global.promise;
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 app.use(flash());
+app.use(logger('dev'));
 app.use(expressSession({
   secret: 'I love someone. Yeah That is me only.',
   resave: false,
@@ -46,6 +47,7 @@ app.use(function(req, res, next){
 app.use('/', indexRoutes);
 app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds', commentRoutes);
+
 
 app.listen(1234, function(){
   console.log('CampSite Has Been Started!');
